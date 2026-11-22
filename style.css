@@ -1,575 +1,670 @@
 /*
-   COMMENT LIRE LES LIENS ENTRE HTML ET CSS
+   CSS signifie « Cascading Style Sheets », en français
+   « feuilles de style en cascade ».
 
-   Le HTML contient les éléments de la page.
-   Le CSS règle leur apparence et leur position.
+   Le HTML décrit les éléments de ta page :
+   <body>, <main>, <h1>, <p>, <img>, etc.
 
-   Sans point, le sélecteur cherche une balise HTML :
-   h1 cherche les balises <h1>.
+   Le CSS choisit ces éléments et règle leur apparence :
+   taille, couleur, espace, position et disposition.
 
-   Avec un point, il cherche une classe :
-   .carre cherche class="carre".
+   Dans une règle CSS :
+   - le sélecteur désigne l’élément HTML concerné ;
+   - la propriété indique ce que l’on règle ;
+   - la valeur indique le réglage choisi.
 
-   1 CSS px est une unité de mise en page.
-   Ce n'est pas toujours un pixel physique de l'écran.
+   Exemple :
+   .carre { height: 240px; }
+
+   .carre est le sélecteur qui retrouve class="carre" dans le HTML.
+   height est la propriété « hauteur ».
+   240px est la valeur donnée à cette propriété.
 */
 
 
-/* Cible la balise <html> du fichier HTML. */
+/*
+   html cible la balise <html lang="fr"> du fichier HTML.
+   C’est la balise principale qui contient toute la page,
+   notamment <head> et <body>.
+*/
 html {
-    /* 100% prend toute la largeur disponible. */
+    /* width signifie « largeur ».
+       100% demande à la page d’utiliser toute la largeur disponible
+       dans la fenêtre du navigateur. */
     width: 100%;
 
-    /* La page mesure au moins toute la hauteur disponible.
-       Elle peut grandir si son contenu est plus long. */
+    /* min signifie « minimum » et height signifie « hauteur ».
+       min-height: 100% demande une hauteur minimale égale à celle
+       de l’élément parent. La page peut grandir si son contenu
+       dépasse cette hauteur. */
     min-height: 100%;
 }
 
 
-/* Cible la balise <body> du fichier HTML.
-   Elle contient la vidéo et le contenu visible. */
+/*
+   body cible la balise <body> du HTML.
+
+   Dans ton HTML, <body> contient la vidéo de fond et <main>.
+   Le contenu visible de ta page se trouve dans cette balise.
+*/
 body {
-    /* Retire la marge ajoutée par défaut par le navigateur.
-       La page commence ainsi au bord de la fenêtre. */
+    /* margin signifie « marge ».
+       0 retire la marge que le navigateur ajoute parfois
+       autour de la page. Le contenu peut commencer au bord
+       de la zone de la page. */
     margin: 0;
 
-    /* Le body prend toute la largeur disponible dans html. */
+    /* width signifie « largeur ».
+       100% fait prendre à body toute la largeur disponible
+       dans html. */
     width: 100%;
 
-    /* vh signifie « hauteur de la fenêtre ».
-       1vh vaut 1% de cette hauteur.
-       100vh correspond à toute la hauteur de la fenêtre.
-       C'est la valeur de secours pour les anciens navigateurs. */
+    /* min-height signifie « hauteur minimale ».
+       vh signifie « viewport height », c’est-à-dire la hauteur
+       de la fenêtre du navigateur.
+       100vh représente toute cette hauteur.
+       Cette première valeur sert de réglage de secours
+       pour les navigateurs qui ne connaissent pas dvh. */
     min-height: 100vh;
 
-    /* dvh signifie « hauteur dynamique de la fenêtre ».
-       1dvh vaut 1% de la hauteur visible actuelle.
-       100dvh suit cette hauteur quand les barres de Safari
-       apparaissent ou disparaissent.
-       Le body peut quand même grandir avec son contenu. */
+    /* dvh signifie « dynamic viewport height » :
+       la hauteur visible et dynamique de la fenêtre.
+       100dvh demande au body de mesurer au moins toute
+       la hauteur actuellement visible. Safari peut recalculer
+       cette hauteur quand ses barres apparaissent ou disparaissent. */
     min-height: 100dvh;
 
-    /* Le texte hérite du blanc,
-       sauf si une autre règle lui donne une couleur. */
+    /* color règle la couleur du texte.
+       white signifie blanc.
+       Les textes à l’intérieur de body héritent de cette couleur,
+       sauf si une autre règle leur en donne une différente. */
     color: white;
 
-    /* Cache ce qui dépasse à gauche ou à droite.
-       Cela évite le défilement horizontal.
-       Le défilement vertical reste possible. */
+    /* overflow signifie « débordement ».
+       overflow-x concerne l’axe horizontal, donc la largeur.
+       hidden cache ce qui dépasse sur les côtés et évite
+       un défilement horizontal. Le défilement vertical reste possible. */
     overflow-x: hidden;
 
-    /* Crée un groupe de superposition pour le body.
-       Cela permet à la vidéo en z-index: -1 de rester
-       derrière les blocs du site. */
+    /* isolation crée une zone de superposition indépendante.
+       Elle permet de placer la vidéo et le contenu dans un ordre
+       contrôlé grâce à z-index. */
     isolation: isolate;
 
-     background-color: #3e034b; 
-     /* Fond violet de toute la page */
+    /* background-color règle la couleur de fond du body.
+       #3e034b est un code couleur violet.
+       Ce fond sert de couleur derrière le contenu. */
+    background-color: #220129;
 }
 
 
 /*
-   @font-face ne cible pas une balise HTML précise.
-   Il déclare une police que les règles CSS peuvent utiliser.
+   @font-face déclare une police personnalisée.
+   Il ne cible pas une balise HTML : il rend cette police disponible
+   pour les autres règles CSS.
 */
 @font-face {
-    /* Donne un nom à la police.
-       Les autres règles l'appellent avec "MaPolice". */
+    /* font-family donne un nom à la police.
+       Les règles suivantes peuvent demander cette police
+       avec le nom « MaPolice ». */
     font-family: "MaPolice";
 
-    /* Cherche le fichier FairfaxBold.ttf dans le dossier police.
-       Le dossier police doit être à côté de style.css. */
+    /* src signifie « source » : indique où se trouve le fichier
+       de police à charger.
+       url() donne son chemin depuis le fichier CSS.
+       format("truetype") indique que le fichier est au format TTF. */
     src: url("police/FairfaxBold.ttf") format("truetype");
 }
 
 
-/* Cible les balises <h1>, <h2> et <p> du HTML.
-   La virgule signifie « appliquer aux trois sélecteurs ». */
+/*
+   h1, h2 et p sont des sélecteurs de balises HTML :
+   - h1 retrouve les titres <h1> ;
+   - h2 retrouve les titres <h2> ;
+   - p retrouve les paragraphes <p>.
+
+   Les virgules veulent dire que la même règle s’applique
+   aux trois types de balises.
+*/
 h1,
 h2,
 p {
-    /* Utilise la police déclarée plus haut.
-       Si elle ne charge pas, utilise une police de secours. */
+    /* font-family signifie « famille de polices ».
+       Le navigateur essaie d’abord la police nommée MaPolice.
+       Si elle ne peut pas être chargée, sans-serif demande
+       une police de remplacement sans empattement. */
     font-family: "MaPolice", sans-serif;
 
-    /* Retire les marges automatiques autour
-       de ces titres et paragraphes. */
+    /* margin: 0 retire les marges par défaut autour
+       des titres et des paragraphes. */
     margin: 0;
 }
 
 
-/* Cible les balises HTML <h1> et <h2>. */
+/*
+   Cette règle cible les balises HTML <h1> et <h2>.
+   Leurs niveaux restent différents dans le HTML,
+   mais leur taille de texte devient ici identique.
+*/
 h1,
 h2 {
-    /* 22px signifie 22 pixels CSS.
-       Les deux niveaux de titre ont cette taille de texte.
-       Leur niveau reste différent dans le HTML. */
+    /* font-size signifie « taille de police ».
+       22px fixe la taille du texte à 22 pixels CSS. */
     font-size: 22px;
 }
 
 
 /*
-   Cible <video class="video-fond"> dans index.html.
-   Le point devant video-fond indique une classe CSS.
+   Ce sélecteur retrouve dans le HTML :
+   <video class="video-fond" autoplay muted loop playsinline>.
+
+   Le point devant video-fond indique que le sélecteur cherche
+   une classe HTML nommée video-fond.
 */
 .video-fond {
-    /* Fixe la vidéo par rapport à la fenêtre.
-       Elle reste en place pendant le défilement. */
+    /* position définit la façon de placer la vidéo.
+       fixed la fixe par rapport à la fenêtre du navigateur :
+       elle reste en place quand on fait défiler la page. */
     position: fixed;
 
-    /* Met les quatre bords à 0 :
-       en haut, à droite, en bas et à gauche. */
+    /* inset règle simultanément les quatre côtés :
+       haut, droite, bas et gauche.
+       0 colle chacun de ces côtés au bord de la fenêtre. */
     inset: 0;
 
-    /* Affiche la vidéo comme un élément bloc.
-       Cela évite l'espace parfois présent sous une vidéo en ligne. */
-    display: block;
-
-    /* vw signifie « largeur de la fenêtre ».
-       1vw vaut 1% de cette largeur.
-       100vw donne toute la largeur de la fenêtre. */
+    /* width signifie « largeur ».
+       100vw signifie 100% de la largeur de la fenêtre.
+       vw veut dire « viewport width », la largeur de la fenêtre. */
     width: 100vw;
 
-    /* vh signifie « hauteur de la fenêtre ».
-       100vh donne toute la hauteur de la fenêtre.
-       La règle mobile remplace cette valeur sur téléphone. */
+    /* height signifie « hauteur ».
+       100vh représente 100% de la hauteur de la fenêtre.
+       Cette valeur sert de secours pour les anciens navigateurs. */
     height: 100vh;
 
-    /* Agrandit l'image pour remplir le cadre sans la déformer.
-       Si les formes du cadre et de la vidéo sont différentes,
-       une partie des bords de la vidéo est coupée. */
+    /* 100dvh représente la hauteur dynamique visible de la fenêtre.
+       Cette valeur, placée après 100vh, la remplace dans les navigateurs
+       qui reconnaissent dvh, notamment les versions récentes de Safari. */
+    height: 100dvh;
+
+    /* object-fit règle la façon dont l’image de la vidéo remplit
+       son cadre.
+       cover agrandit ou recadre l’image pour remplir tout le cadre
+       sans l’étirer. Une partie de l’image peut être coupée. */
     object-fit: cover;
 
-    /* Centre la vidéo dans son cadre.
-       Si elle est recadrée, on coupe ses bords de façon égale. */
+    /* object-position règle la partie de l’image placée au centre.
+       center centre la vidéo horizontalement et verticalement. */
     object-position: center;
 
-    /* Place la vidéo derrière les blocs du site.
-       z-index règle l'ordre des éléments superposés. */
+    /* z-index règle l’ordre de superposition.
+       0 place la vidéo sur le niveau 0.
+       La règle .grille, plus bas, place le contenu au niveau 1. */
     z-index: 0;
 
-    /* Les clics traversent la vidéo.
-       On peut toujours utiliser les liens du site. */
+    /* pointer-events règle la réception des clics.
+       none fait passer les clics à travers la vidéo,
+       afin que les liens et les cartes restent utilisables. */
     pointer-events: none;
-
-    /* Affiche ce violet si la vidéo ne se charge pas. */
-    background-color: #330237;
 }
 
 
 /*
-   Cible <main class="grille"> dans index.html.
-   Cette balise main contient les blocs du portfolio.
+   Ce sélecteur retrouve <main class="grille"> dans le HTML.
+   <main> désigne le contenu principal de la page.
+   La classe grille permet au CSS d’organiser ses cartes.
 */
 .grille {
-    /* Active CSS Grid pour ranger les blocs de main
+    /* display détermine le mode de disposition.
+       grid active CSS Grid, un système qui range les éléments
        en lignes et en colonnes. */
     display: grid;
 
-    /* Crée deux colonnes.
-       La première fait 240px, soit 240 pixels CSS.
-       1fr donne à la deuxième tout l'espace restant. */
+    /* grid-template-columns définit les colonnes de la grille.
+       240px donne 240 pixels CSS à la première colonne.
+       1fr donne à la deuxième colonne toute la place restante.
+       fr signifie « fraction de l’espace disponible ». */
     grid-template-columns: 240px 1fr;
 
-    /* Laisse 20px, donc 20 pixels CSS,
-       entre les lignes et les colonnes. */
+    /* gap signifie « espace ».
+       20px laisse 20 pixels CSS entre les lignes et les colonnes. */
     gap: 20px;
 
-    /* La grille ne dépasse pas 1100px de largeur.
-       Sur un très grand écran, son contenu reste centré. */
+    /* max-width signifie « largeur maximale ».
+       La grille ne dépassera pas 1100 pixels CSS de large. */
     max-width: 1100px;
 
-    /* 30px en haut et en bas.
-       auto partage l'espace restant sur les côtés
-       et centre ainsi la grille. */
+    /* margin règle l’espace extérieur autour de main.
+       30px ajoute 30 pixels en haut et en bas.
+       auto demande au navigateur de partager l’espace restant
+       à gauche et à droite : la grille est ainsi centrée. */
     margin: 30px auto;
 
-    /* 0px d'espace intérieur en haut et en bas.
-       20px d'espace intérieur à gauche et à droite.
-       Les blocs ne collent pas au bord de l'écran. */
+    /* padding règle l’espace intérieur de main.
+       La première valeur, 0, met 0 pixel en haut et en bas.
+       La seconde, 20px, met 20 pixels à gauche et à droite. */
     padding: 0 20px;
 
+    /* position: relative permet à main de servir de repère
+       à son ordre de superposition.
+       La grille reste à sa place habituelle dans la page. */
     position: relative;
-    
-   z-index: 1;
+
+    /* z-index: 1 place main devant la vidéo, qui a z-index: 0.
+       Le texte et les cartes restent donc visibles au-dessus du fond. */
+    z-index: 1;
+
+    /* transparent signifie « transparent ».
+       La couleur de fond de main ne masque pas la vidéo derrière lui. */
+    background-color: transparent;
 }
 
 
 /*
-   Cible les éléments qui portent class="carre"
-   ou class="rectangle" dans le HTML.
+   Ces deux sélecteurs ciblent tous les éléments HTML qui portent
+   class="carre" ou class="rectangle".
 
-   Cela comprend les div de contenu
-   et le lien Jardin Lys qui porte ces classes.
+   Dans ton HTML, ce sont surtout des balises <div>.
+   Le lien Jardin Lys est une balise <a> qui porte aussi
+   class="rectangle", donc cette règle le concerne également.
 */
 .carre,
 .rectangle {
-    /* Donne aux blocs leur fond bleu foncé.
-       hwb décrit la teinte, le blanc et le noir de la couleur. */
+    /* background-color règle la couleur de fond du bloc.
+       hwb() décrit une couleur avec sa teinte, sa quantité de blanc
+       et sa quantité de noir.
+       Ici, le résultat est un bleu foncé. */
     background-color: hwb(214 8% 71%);
 
-    /* Ajoute un contour blanc continu de 2px.
-       px signifie pixels CSS ; solid signifie trait continu. */
+    /* border signifie « bordure ».
+       2px donne une épaisseur de 2 pixels CSS.
+       solid demande un trait continu.
+       white donne la couleur blanche à la bordure. */
     border: 2px solid white;
 
-    /* Arrondit les quatre coins de 20px. */
+    /* border-radius arrondit les coins de la bordure.
+       20px règle l’arrondi à 20 pixels CSS. */
     border-radius: 20px;
 
-    /* Ajoute 20px d'espace entre le bord
-       et le contenu à l'intérieur de chaque bloc. */
+    /* padding ajoute de l’espace entre le bord du bloc
+       et son contenu intérieur : titres, texte ou images.
+       Ici, cet espace mesure 20 pixels sur les quatre côtés. */
     padding: 20px;
 
-    /* Compte le padding et le contour dans la taille du bloc.
-       Sans cela, ils pourraient s'ajouter à la taille annoncée. */
+    /* box-sizing détermine comment le navigateur calcule
+       la largeur et la hauteur d’un bloc.
+       border-box inclut le contenu, le padding et la bordure
+       dans la taille annoncée. */
     box-sizing: border-box;
 
-    /* Centre le texte de gauche à droite dans les blocs. */
+    /* text-align règle l’alignement horizontal du texte.
+       center le centre dans le bloc. */
     text-align: center;
 }
 
 
 /*
-   Cible les balises qui portent class="carre".
-   Dans index.html, ce sont les blocs de titre et d'icône.
+   .carre retrouve les balises HTML qui portent class="carre".
+   Dans ton HTML, ces blocs présentent des titres et parfois
+   des icônes ou ton portrait.
 */
 .carre {
-    /* Donne une hauteur de 240px.
-       La première colonne de la grille fait aussi 240px :
-       le bloc a donc une forme carrée sur grand écran. */
+    /* height fixe la hauteur.
+       240px donne une hauteur de 240 pixels CSS sur grand écran. */
     height: 240px;
 
-    /* Active Flexbox pour placer les éléments
-       qui sont à l'intérieur du carré. */
+    /* display: flex active Flexbox à l’intérieur du carré.
+       Flexbox aide à placer ses éléments enfants. */
     display: flex;
 
-    /* Empile le titre et l'image verticalement.
-       Le premier élément du HTML apparaît en haut. */
+    /* flex-direction règle le sens de rangement des enfants.
+       column les empile verticalement, du haut vers le bas. */
     flex-direction: column;
 
-    /* Centre le titre et l'image horizontalement. */
+    /* align-items règle l’alignement des enfants sur l’axe horizontal.
+       center les place au milieu de la largeur du bloc. */
     align-items: center;
 
-    /* Centre l'ensemble du contenu verticalement. */
+    /* justify-content règle leur position sur l’axe vertical.
+       center place l’ensemble du contenu au milieu de la hauteur. */
     justify-content: center;
 
-    /* Laisse 10px entre le titre et l'image, par exemple. */
+    /* gap laisse 10 pixels CSS entre les éléments enfants,
+       par exemple entre un titre et une icône. */
     gap: 10px;
 }
 
 
 /*
-   Cible les éléments class="rectangle" du HTML.
-   Ici, ce sont les blocs de texte et le lien Jardin Lys.
+   .rectangle retrouve les balises HTML qui portent
+   class="rectangle" : les blocs de texte et le lien Jardin Lys.
 */
 .rectangle {
-    /* Donne une hauteur minimale de 240px.
-       Le bloc peut grandir si son texte prend plus de place. */
+    /* min-height fixe une hauteur minimale, pas une hauteur définitive.
+       240px donne au bloc au moins 240 pixels CSS.
+       Il peut grandir si son contenu a besoin de plus de place. */
     min-height: 240px;
 
-    /* Active Flexbox à l'intérieur du rectangle. */
+    /* display: flex active Flexbox dans le rectangle. */
     display: flex;
 
-    /* Empile paragraphes, titres et images verticalement. */
+    /* Empile les paragraphes, titres et images verticalement. */
     flex-direction: column;
 
-    /* Centre le contenu en hauteur s'il reste de la place. */
+    /* Centre le groupe d’éléments verticalement
+       quand le bloc dispose d’espace supplémentaire. */
     justify-content: center;
 
-    /* Laisse 12px entre les éléments du bloc.
-       Cela sépare deux paragraphes ou un paragraphe d'un titre. */
+    /* Laisse 12 pixels CSS entre les éléments enfants,
+       par exemple entre deux paragraphes. */
     gap: 12px;
 }
 
 
 /*
-   Cible <div class="ligne-projets"> dans le HTML.
-   Ce groupe contient le titre des projets
-   et le lien vers Jardin Lys.
+   Ce sélecteur retrouve <div class="ligne-projets"> dans le HTML.
+   Cette div regroupe le titre « Mes derniers projets »
+   et le bloc cliquable qui présente Jardin Lys.
 */
 .ligne-projets {
-    /* Étend ce groupe de la première à la dernière
-       ligne verticale de la grille principale.
-       Il prend ainsi toute la largeur de cette grille. */
+    /* grid-column règle l’emplacement de cet élément
+       dans les colonnes de la grande grille.
+       1 / -1 signifie : commencer à la première ligne de grille
+       et s’étendre jusqu’à la dernière. Le groupe prend donc
+       toute la largeur de main. */
     grid-column: 1 / -1;
 
-    /* Crée une grille à l'intérieur de ce groupe. */
+    /* Active une grille à l’intérieur de ligne-projets.
+       Cette grille organise les deux blocs de projets. */
     display: grid;
 
-    /* La première colonne fait 240px.
-       La deuxième prend la place restante avec 1fr.
-       minmax(0, 1fr) autorise cette colonne à rétrécir. */
+    /* Crée deux colonnes internes.
+       La première fait 240 pixels CSS.
+       minmax(0, 1fr) laisse la deuxième prendre le reste
+       et l’autorise à rétrécir si nécessaire. */
     grid-template-columns: 240px minmax(0, 1fr);
 
-    /* Laisse 20px entre le titre et le lien Jardin Lys. */
+    /* Laisse 20 pixels CSS entre les deux colonnes. */
     gap: 20px;
 }
 
 
 /*
-   Le signe > veut dire « enfant direct ».
-   Ce sélecteur cible le bloc class="carre"
-   placé directement dans class="ligne-projets".
+   Le signe > signifie « enfant direct ».
+   Ce sélecteur cible seulement un élément .carre placé directement
+   dans .ligne-projets, comme le bloc « Mes derniers projets ».
 */
 .ligne-projets > .carre {
-    /* Remplace la hauteur fixe de 240px par auto.
-       Le bloc peut s'étirer selon la hauteur de sa rangée. */
+    /* height: auto remplace la hauteur fixe de 240px.
+       auto laisse la hauteur s’ajuster au contenu
+       et à la hauteur de la rangée. */
     height: auto;
 
-    /* Le bloc du titre des projets mesure au moins 450px de haut.
-       Cela lui donne plus de présence à côté du grand projet. */
+    /* min-height impose tout de même une hauteur minimale
+       de 450 pixels CSS à ce carré sur grand écran. */
     min-height: 450px;
 }
 
 
 /*
-   L'espace signifie « à l'intérieur de ».
-   Ce sélecteur cible les balises <img>
-   placées dans un élément class="carre".
+   L’espace entre .carre et img signifie « une image à l’intérieur
+   d’un élément qui porte class="carre" ».
+   Cela cible les icônes placées dans les carrés.
 */
 .carre img {
-    /* Donne une largeur de 60px aux images de ces blocs.
-       Le portrait reçoit une autre largeur plus bas. */
+    /* Donne une largeur de 60 pixels CSS aux images des carrés.
+       Le portrait reçoit une largeur différente plus bas. */
     width: 60px;
 
-    /* Calcule la hauteur selon les proportions de l'image.
-       Cela évite de l'étirer ou de l'écraser. */
+    /* auto calcule la hauteur d’après les proportions d’origine
+       de l’image, pour éviter de l’écraser ou de l’étirer. */
     height: auto;
 }
 
 
 /*
-   Cible <img class="photo"> lorsqu'elle se trouve
-   à l'intérieur d'un élément class="carre".
+   .carre .photo cible précisément l’image du portrait :
+   dans le HTML, elle porte class="photo" et se trouve
+   à l’intérieur d’un élément class="carre".
 */
 .carre .photo {
-    /* Donne 140px de largeur au portrait. */
+    /* width règle la largeur du portrait à 140 pixels CSS. */
     width: 140px;
 
-    /* Donne 140px de hauteur au portrait.
-       Largeur et hauteur égales forment un carré. */
+    /* height règle sa hauteur à 140 pixels CSS.
+       Largeur et hauteur égales créent un cadre carré. */
     height: 140px;
 
-    /* Arrondit le carré à 50% de sa taille.
-       Il devient un cercle. */
+    /* 50% arrondit les coins à la moitié de la taille du cadre.
+       Avec un cadre carré, l’image devient ronde. */
     border-radius: 50%;
 
-    /* Remplit le cercle avec la photo sans la déformer.
-       Les bords de la photo peuvent être coupés. */
+    /* cover remplit le cercle avec la photo sans la déformer.
+       Les bords de la photo peuvent être coupés pour remplir le cercle. */
     object-fit: cover;
 
-    /* center centre la photo horizontalement.
-       25% règle sa position verticale dans le cercle.
-
-       50% placerait le milieu vertical de la photo
-       au milieu du cercle.
-
-       25% aligne un point plus haut de la photo
-       avec une position plus haute dans le cercle.
-       Cela peut garder davantage le visage visible
-       si le bas de la photo est coupé. */
+    /* object-position indique quelle partie de la photo garder visible.
+       center centre la photo de gauche à droite.
+       25% règle sa position verticale dans le cercle, vers le haut. */
     object-position: center 25%;
 
-    /* Ajoute un contour bleu de 5px autour du portrait. */
+    /* Ajoute une bordure bleue continue de 5 pixels CSS
+       autour de la photo. */
     border: 5px solid #0d2c83;
 
-    /* Ajoute un contour blanc de 4px à l'extérieur du bleu.
-       Les trois premiers nombres valent 0 :
-       pas de décalage horizontal, vertical ni de flou. */
+    /* box-shadow crée une ombre ou un contour extérieur.
+       0 0 0 signifie aucun décalage et aucun flou.
+       4px crée un contour blanc de 4 pixels autour du bleu. */
     box-shadow: 0 0 0 4px white;
 
-    /* Inclut le contour bleu dans les 140px du portrait. */
+    /* Inclut la bordure bleue dans les 140 pixels de largeur
+       et de hauteur du portrait. */
     box-sizing: border-box;
 
-    /* Donne à la photo une légère teinte sépia. */
+    /* filter applique un effet visuel à la photo.
+       sepia(20%) ajoute une légère teinte sépia de 20%. */
     filter: sepia(20%);
 }
 
 
 /*
-   Cible <img class="jardinlysphoto"> dans index.html.
-   Cette image montre le projet Jardin Lys.
+   .jardinlysphoto cible l’image qui porte class="jardinlysphoto"
+   dans le lien du projet Jardin Lys.
 */
 .jardinlysphoto {
-    /* Demande une largeur de 350px. */
+    /* Demande une largeur de 350 pixels CSS à l’image. */
     width: 350px;
 
-    /* Empêche l'image de dépasser de son bloc.
-       Elle rétrécit si le bloc devient plus étroit. */
+    /* max-width limite la largeur maximale.
+       100% interdit à l’image de dépasser la largeur disponible
+       dans son bloc, notamment sur un écran étroit. */
     max-width: 100%;
 
-    /* Garde les proportions d'origine de l'image. */
+    /* auto conserve les proportions originales de l’image. */
     height: auto;
 
-    /* auto partage l'espace à gauche et à droite.
-       L'image se retrouve centrée dans son bloc. */
+    /* margin: 0 auto retire les marges verticales
+       et partage les marges horizontales.
+       L’image est ainsi centrée dans son bloc. */
     margin: 0 auto;
 }
 
 
 /*
-   Cible toutes les balises de lien <a> du HTML :
+   a cible toutes les balises HTML <a>, donc tous les liens :
    LinkedIn, Jardin Lys, le CV et GitHub.
 */
 a {
-    /* Affiche le texte de tous ces liens en blanc. */
+    /* Donne une couleur blanche au texte des liens. */
     color: white;
 }
 
 
 /*
-   Cible le lien Jardin Lys grâce à sa classe.
-   Dans le HTML, il porte class="lien-jardinlys".
+   .lien-jardinlys retrouve le lien <a> du projet Jardin Lys,
+   qui porte class="lien-jardinlys" dans le HTML.
 */
 .lien-jardinlys {
-    /* Retire le soulignement habituel du lien. */
+    /* text-decoration règle la décoration du texte.
+       none retire le soulignement habituel du lien. */
     text-decoration: none;
 }
 
 
 /*
-   :hover désigne le lien <a> quand la souris passe dessus.
-   Sur écran tactile, il n'y a généralement pas de souris.
+   :hover est un état du lien <a> :
+   il s’applique quand le pointeur de souris passe dessus.
+   Sur un téléphone tactile, il n’y a généralement pas de souris.
 */
 .lien-jardinlys:hover {
-    /* Change le fond du bloc en gris au survol. */
+    /* Change le fond du lien au survol.
+       rgb() décrit une couleur avec rouge, vert et bleu.
+       Les trois valeurs égales à 100 donnent un gris. */
     background-color: rgb(100, 100, 100);
 }
 
 
 /*
-   Applique les règles suivantes si la fenêtre
-   fait 650px de large ou moins.
+   @media est une règle conditionnelle.
+   Elle demande au navigateur d’appliquer les règles à l’intérieur
+   uniquement quand la condition entre parenthèses est vraie.
 
-   px signifie pixels CSS.
-   La règle sert à adapter la page aux petits écrans.
+   max-width: 650px signifie que la fenêtre fait au maximum
+   650 pixels CSS de large. Les règles suivantes adaptent alors
+   la page aux petits écrans.
 */
 @media (max-width: 650px) {
 
     /*
-       Cible encore <video class="video-fond">.
-       Cette règle remplace certaines valeurs précédentes
-       quand la fenêtre fait 650px de large ou moins.
+       Sur petit écran, ce sélecteur retrouve toujours
+       <video class="video-fond">.
+       Ces dimensions remplacent celles définies plus haut
+       quand la fenêtre fait 650 pixels CSS de large ou moins.
     */
     .video-fond {
-        /* Prend toute la largeur disponible du parent. */
+        /* La vidéo prend toute la largeur disponible. */
         width: 100%;
 
         /* Hauteur de secours pour les navigateurs
-           qui ne reconnaissent pas dvh. */
+           qui ne reconnaissent pas 100dvh. */
         height: 100%;
 
-        /* dvh signifie « hauteur dynamique de la fenêtre ».
-           1dvh vaut 1% de sa hauteur visible actuelle.
-           100dvh remplit donc cette hauteur visible.
-
-           Si Safari affiche ou cache ses barres,
-           la hauteur peut s'adapter à ce changement. */
+        /* 100dvh fait suivre la hauteur de la zone visible
+           du téléphone quand les barres de Safari changent. */
         height: 100dvh;
     }
 
 
     /*
-       Cible <main class="grille"> sur petit écran.
+       Sur téléphone, ce sélecteur retrouve <main class="grille">.
     */
     .grille {
-        /* Remplace les deux colonnes par une seule.
-           Les blocs se placent les uns sous les autres. */
+        /* 1fr crée une seule colonne qui prend toute la largeur.
+           Les cartes se rangent donc les unes sous les autres. */
         grid-template-columns: 1fr;
 
-        /* Réduit l'espace entre les blocs à 15px. */
+        /* Réduit l’espace entre les cartes à 15 pixels CSS. */
         gap: 15px;
 
-        /* Laisse 20px au-dessus et en dessous.
-           auto centre la grille sur les côtés. */
+        /* Laisse 20 pixels CSS au-dessus et en dessous.
+           auto centre main horizontalement dans l’espace disponible. */
         margin: 20px auto;
 
-        /* Garde 15px d'espace intérieur sur les côtés. */
+        /* Laisse 15 pixels CSS à gauche et à droite
+           à l’intérieur de main. */
         padding: 0 15px;
     }
 
 
     /*
-       Cible <div class="ligne-projets"> sur petit écran.
+       Ce sélecteur retrouve la div class="ligne-projets"
+       sur un petit écran.
     */
     .ligne-projets {
-        /* Met le titre des projets au-dessus du projet. */
+        /* Remplace les deux colonnes par une seule :
+           le titre des projets passe au-dessus du lien Jardin Lys. */
         grid-template-columns: 1fr;
 
-        /* Laisse 15px entre le titre et le projet. */
+        /* Réduit à 15 pixels CSS l’espace entre ces deux blocs. */
         gap: 15px;
     }
 
 
     /*
-       Cible les éléments class="carre" sur petit écran.
+       .carre retrouve tous les blocs HTML portant class="carre"
+       sur un écran de 650 pixels CSS ou moins.
     */
     .carre {
-        /* Le carré prend toute la largeur disponible. */
+        /* Le carré prend toute la largeur disponible dans sa colonne. */
         width: 100%;
 
-        /* auto laisse la hauteur suivre le contenu.
-           Le bloc n'est donc plus forcé à faire 240px. */
+        /* auto laisse la hauteur s’adapter au contenu.
+           Le bloc n’est plus obligé de mesurer 240 pixels de haut. */
         height: auto;
 
-        /* Garde tout de même au moins 200px de hauteur. */
+        /* Le bloc garde au moins 200 pixels CSS de hauteur. */
         min-height: 200px;
     }
 
 
     /*
-       Cible uniquement le carré dans ligne-projets.
-       Cette règle remplace son minimum de 450px.
+       Ce sélecteur cible le carré placé directement dans
+       .ligne-projets, c’est-à-dire le bloc « Mes derniers projets ».
     */
     .ligne-projets > .carre {
-        /* Le titre des projets garde au moins 200px de haut.
-           Cela évite un grand espace vide sur téléphone. */
+        /* Sur téléphone, ce bloc garde une hauteur minimale
+           de 200 pixels CSS au lieu de 450 pixels. */
         min-height: 200px;
     }
 
 
     /*
-       Cible les éléments class="rectangle" sur petit écran.
+       .rectangle retrouve tous les blocs HTML portant
+       class="rectangle" sur un petit écran.
     */
     .rectangle {
-        /* Retire le minimum de 240px.
-           Chaque bloc prend la hauteur nécessaire à son contenu. */
+        /* min-height: 0 retire la hauteur minimale de 240 pixels.
+           Le rectangle prend seulement la hauteur nécessaire
+           pour contenir son texte et ses autres éléments. */
         min-height: 0;
     }
 
 
     /*
-       Cible les titres HTML <h1> et <h2> sur petit écran.
+       Ces sélecteurs ciblent les titres HTML <h1> et <h2>
+       sur téléphone.
     */
     h1,
     h2 {
-        /* Réduit la taille des titres à 20px. */
+        /* Réduit la taille des titres à 20 pixels CSS. */
         font-size: 20px;
     }
 
 
     /*
-       Cible les paragraphes HTML <p> sur petit écran.
+       p cible les balises HTML <p>, donc les paragraphes.
     */
     p {
-        /* Règle le texte des paragraphes à 16px. */
+        /* Règle la taille des paragraphes à 16 pixels CSS. */
         font-size: 16px;
 
-        /* Espace les lignes à 1,5 fois la taille du texte.
-           Avec 16px de texte, une ligne occupe 24px de haut. */
+        /* line-height règle la hauteur de chaque ligne de texte.
+           1.5 signifie une hauteur égale à une fois et demie
+           la taille du texte : avec 16px, environ 24px par ligne. */
         line-height: 1.5;
     }
 
 
     /*
-       Cible le portrait <img class="photo">
-       à l'intérieur d'un élément class="carre".
+       Ce sélecteur retrouve le portrait class="photo"
+       placé dans un bloc class="carre" sur téléphone.
     */
     .carre .photo {
-        /* Réduit la largeur du portrait à 100px. */
+        /* Réduit la largeur du portrait à 100 pixels CSS. */
         width: 100px;
 
-        /* Réduit aussi sa hauteur à 100px.
-           Avec border-radius: 50%, il reste rond. */
+        /* Réduit sa hauteur à 100 pixels CSS.
+           Le portrait reste rond grâce à border-radius: 50%. */
         height: 100px;
     }
 }
