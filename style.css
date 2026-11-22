@@ -128,7 +128,7 @@ h2 {
 
     /* La boîte de la vidéo prend toute la largeur
        de la zone où elle est fixée. */
-    width: 100%;
+    width: 100vw;
 
     /* La boîte prend toute la hauteur de cette zone.
        Sur petit écran, la règle @media change cette valeur. */
