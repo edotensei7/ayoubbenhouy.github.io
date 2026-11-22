@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<!-- Déclaration attendue au début d’un document HTML moderne.
+     Elle fait utiliser au navigateur son mode standard.
+     Ce mode applique les règles modernes de mise en page. -->
+
+<!-- html est la balise qui contient head et body.
+     lang signifie « langue ». fr est le code du français.
+     Les lecteurs d’écran peuvent s’en servir pour choisir
+     une voix qui prononce correctement les mots français.
+     Les outils de traduction peuvent s’en servir pour
+     reconnaître la langue dans laquelle le texte est écrit. -->
+<html lang="fr">
+
+<!-- head contient les informations que le navigateur lit
+     pour préparer la page. Le contenu visible va dans body. -->
+<head>
+    <!-- meta fournit une information sur le document.
+         charset indique comment lire les caractères du fichier.
+         UTF-8 permet de lire les accents et les symboles.
+         Ce réglage doit correspondre à l’encodage du fichier. -->
+    <meta charset="UTF-8">
+
+    <!-- link relie la page à une ressource.
+         rel="icon" dit au navigateur d’en faire l’icône
+         qui apparaît à côté du titre dans l’onglet.
+         type annonce le format PNG.
+         href donne le chemin depuis le dossier de index.html.
+         L’icône est facultative. -->
+    <link rel="icon" type="image/png" href="image/logo.png">
+
+    <!-- viewport désigne la zone où la page est affichée.
+         width=device-width adapte la largeur à l’appareil.
+         initial-scale=1.0 fixe le zoom au démarrage.
+         Sur téléphone, ce réglage aide le navigateur à
+         appliquer la règle CSS prévue pour 650 px ou moins. -->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <!-- rel="stylesheet" indique une feuille de style.
+         href="style.css" donne le fichier à charger.
+         Ce lien est nécessaire pour utiliser ton CSS externe.
+         Avec ce chemin, les deux fichiers doivent être
+         dans le même dossier. -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- title nomme le document.
+         Le navigateur l’affiche dans l’onglet et l’utilise
+         par exemple quand on ajoute la page aux favoris. -->
+    <title>Présentation de mon parcours</title>
+</head><!-- Fin des informations sur la page. -->
+
+<!-- body contient le contenu affiché, y compris ce que
+     le visiteur découvre en descendant dans la page.
+     La règle body du CSS s’applique à cet élément. -->
+<body>
+    <!-- Une classe est un nom donné à un élément.
+         Plusieurs éléments peuvent partager ce nom.
+         Dans le CSS, le point sert à chercher une classe.
+         Exemple : .video-fond retrouve class="video-fond".
+
+         video crée le lecteur dont on se sert comme fond.
+         autoplay demande de lancer la vidéo au chargement.
+         muted coupe le son et facilite la lecture automatique.
+         loop relance la vidéo lorsqu’elle se termine.
+         playsinline permet de la lire dans la page sur iPhone.
+         Ces options sont des choix pour ta vidéo de fond. -->
+    <video class="video-fond" autoplay muted loop playsinline>
+        <!-- source indique au lecteur quel fichier ouvrir.
+             src contient son chemin.
+             type permet au navigateur de connaître le format
+             avant de lire le fichier. Ici, c’est du MP4.
+             Cette balise n’a pas de fermeture. -->
+        <source src="image/retrovideo2.mp4" type="video/mp4">
+    </video><!-- Fin du lecteur vidéo. -->
+
+    <!-- main indique où se trouve le contenu principal.
+         Un lecteur d’écran peut s’en servir pour y aller
+         directement. Le CSS .grille range les blocs qui
+         sont placés directement à l’intérieur de main. -->
+    <main class="grille">
+
+        <!-- div regroupe des éléments dans un bloc.
+             Le nom carre est un choix de ton projet.
+             C’est la règle CSS .carre qui donne sa taille
+             à ce bloc et qui centre son contenu. -->
+        <div class="carre">
+            <!-- img affiche une image. Cette balise se suffit
+                 à elle-même et n’a pas de fermeture.
+                 class="photo" permet de cibler ce portrait
+                 avec .carre .photo dans le CSS.
+                 src donne ici l’adresse d’une image en ligne.
+                 alt décrit l’image pour un lecteur d’écran
+                 ou si l’image ne peut pas être chargée.
+                 Une image qui apporte une information doit
+                 avoir un texte de remplacement adapté. -->
+            <img
+                class="photo"
+                src="https://i.postimg.cc/x861P24L/Capture-d-e-cran-2026-09-27-a-12-07-32.png"
+                alt="Ma photo"
+            >
+
+            <!-- h1 indique un titre de niveau 1.
+                 Ici, il annonce le sujet de la page.
+                 Les outils d’accessibilité peuvent s’en servir
+                 pour parcourir les titres du document.
+                 Le CSS change son apparence. -->
+            <h1>Présentation professionnel</h1>
+        </div><!-- Fin du bloc du portrait. -->
+
+        <!-- .rectangle permet au CSS de donner une forme
+             à ce bloc et d’empiler ce qu’il contient. -->
+        <div class="rectangle">
+            <!-- p regroupe plusieurs phrases en paragraphe.
+                 Le navigateur coupe le texte selon la largeur.
+                 br force un retour à la ligne à cet endroit.
+                 L’écart entre les paragraphes vient du CSS. -->
+            <p>
+                Bonjour je m'appelle Ayoub j'ai 26 ans après avoir
+                eu une longue experience dans la grande distribution
+                j'ai décidé de me réorienter dans un domaine dans
+                lequel je veut m'épanouir.<br>
+            </p><!-- Fin du premier paragraphe. -->
+
+            <!-- Ce second p crée un autre paragraphe.
+                 Le gap de .rectangle sépare les deux blocs. -->
+            <p>
+                Mes métiers de rêves serait dans l'idéal développeur
+                d'application ou développeur web pour me permettre
+                d'enrichir ma créativité
+            </p><!-- Fin du deuxième paragraphe. -->
+
+            <!-- h2 indique un titre de niveau 2.
+                 Ici, il contient le texte du lien LinkedIn. -->
+            <h2>
+                <!-- a crée un lien quand on lui donne un href.
+                     href indique l’adresse à ouvrir.
+                     Le texte du lien explique sa destination.
+                     La règle CSS a donne sa couleur au lien. -->
+                <a
+                    href="https://www.linkedin.com/in/ayoub-benhouy-23a6531b1/"
+                >
+                    Lien vers mon Linkedin
+                </a><!-- Fin de la zone cliquable. -->
+            </h2><!-- Fin du titre du lien. -->
+        </div><!-- Fin du bloc de présentation. -->
+
+        <!-- La règle .carre centre le titre et l’icône. -->
+        <div class="carre">
+            <!-- h2 indique le début du sujet « Mes notions ». -->
+            <h2>Mes notions</h2>
+
+            <!-- src cherche ampoule.png dans le dossier image.
+                 alt donne une description de l’icône.
+                 Le CSS .carre img règle sa taille, car l’image
+                 se trouve dans un bloc class="carre". -->
+            <img
+                class="ampoule"
+                src="image/ampoule.png"
+                alt="Ampoule pixel art"
+            >
+        </div><!-- Fin du bloc du titre. -->
+
+        <!-- .rectangle règle le bloc de texte lié au titre. -->
+        <div class="rectangle">
+            <!-- p regroupe le texte sur tes notions. -->
+            <p>
+                J'ai quelques notions en HTML et CSS et j'aimerais
+                trouver une entreprise qui pourrait m'embaucher en
+                alternance pour pouvoir progresser dans ces langages
+                et en apprendre d'autre en amont comme notament le
+                javascript et python.
+            </p><!-- Fin du paragraphe. -->
+        </div><!-- Fin du bloc « Mes notions ». -->
+
+        <!-- Réutilise .carre pour le titre et l’image. -->
+        <div class="carre">
+            <!-- h2 introduit le sujet de l’informatique. -->
+            <h2>Pourquoi le domaine de l'informatique ?</h2>
+
+            <!-- img charge ordi.png depuis le dossier image.
+                 .carre img règle sa taille.
+                 Un lecteur d’écran peut lire « Ampoule »,
+                 la description alt présente dans ton fichier. -->
+            <img
+                class="ordi"
+                src="image/ordi.png"
+                alt="Ampoule"
+            >
+        </div><!-- Fin du bloc du titre. -->
+
+        <!-- .rectangle peut grandir pour contenir le récit. -->
+        <div class="rectangle">
+            <!-- Premier p, sur tes débuts en informatique. -->
+            <p>
+                J'ai eu mon première ordinateur jeune, je jouais
+                a plusieurs jeu notamment un jeu qui avait du succès
+                en France qui s'appelait Habbo, après de longue heures
+                de jeu j'ai eu l'envie de crée mon propre rétro serveur
+                que j'ai coder avec mes amis.
+            </p><!-- Fin du premier paragraphe. -->
+
+            <!-- Deuxième p, sur ce que tu as appris. -->
+            <p>
+                J'ai donc toucher aux HTML, CSS, MySQL, FileZila,
+                Photoshop. J'ai eu donc eu l'envie de retrouver
+                cette nostalgie de coder, faire du design et être
+                fier de réaliser des projets J'ai donc récemment
+                fait la piscine de l'école 42 qui était une
+                expérience enrichisante.
+            </p><!-- Fin du deuxième paragraphe. -->
+
+            <!-- Troisième p, sur la recherche d’alternance. -->
+            <p>
+                Malheursement les projets que j'ai exporter sur Github
+                ne peuvent pas être public par soucis de confidentialité.
+                Et aujourd'hui je souhaite trouver une entreprise
+                pour me prendre en alternance en tant que développeur.
+            </p><!-- Fin du troisième paragraphe. -->
+        </div><!-- Fin du bloc de ton parcours. -->
+
+        <!-- Ce div regroupe le titre et le projet Jardin Lys.
+             La règle .ligne-projets utilise toute la largeur
+             de main et organise ces deux blocs entre eux. -->
+        <div class="ligne-projets">
+            <!-- Ce bloc est directement dans .ligne-projets.
+                 Le CSS lui donne donc une hauteur spéciale
+                 avec le sélecteur .ligne-projets > .carre. -->
+            <div class="carre">
+                <!-- h2 donne le titre de la partie projets. -->
+                <h2>Mes derniers projets</h2>
+
+                <!-- .carre img donne sa largeur à l’icône.
+                     alt annonce « Dossier » si nécessaire. -->
+                <img
+                    class="dossier"
+                    src="image/dossier.png"
+                    alt="Dossier"
+                >
+            </div><!-- Fin du bloc du titre des projets. -->
+
+            <!-- a entoure tout le projet, qui devient cliquable.
+                 href indique où le clic mène.
+                 L’espace dans class sépare deux classes.
+                 rectangle donne la forme du bloc.
+                 lien-jardinlys règle l’apparence de ce lien,
+                 notamment la couleur quand on le survole. -->
+            <a
+                class="rectangle lien-jardinlys"
+                href="https://jardinlys.com"
+            >
+                <!-- img affiche la capture de la boutique.
+                     .jardinlysphoto limite sa largeur et la centre.
+                     alt indique ce que représente la capture. -->
+                <img
+                    class="jardinlysphoto"
+                    src="image/jardinlys.png"
+                    alt="Photo du site web"
+                >
+
+                <!-- p présente le projet. Le texte est cliquable
+                     parce qu’il est à l’intérieur de a. -->
+                <p>
+                    Le dernier projet dans lequel je me suis appliqué
+                    est une boutique en ligne que j’ai créée
+                    avec Shopify.
+                </p><!-- Fin de la présentation du projet. -->
+
+                <!-- Nouveau p pour décrire le style de la boutique. -->
+                <p>
+                    Je me suis inspiré de grandes maisons de luxe,
+                    avec un thème plutôt discret et sombre et une
+                    police de texte qui donne un effet élégant.
+                    Je me suis servi de Canva et Photoshop
+                    pour faire le logo.
+                </p><!-- Fin de la description du style. -->
+
+                <!-- Nouveau p pour décrire les changements prévus. -->
+                <p>
+                    Je pense retravailler le site pour faire
+                    un autre thème, plus fleuri et lumineux.
+                </p><!-- Fin du paragraphe. -->
+
+                <!-- Ce h1 sert d’invitation à cliquer.
+                     Il reçoit les mêmes réglages de texte
+                     que le h1 du portrait. -->
+                <h1>
+                    Découvrez Jardin Lys, ma boutique en ligne de
+                    vêtements en cliquant sur la section.
+                </h1><!-- Fin du titre dans le lien. -->
+            </a><!-- Fin du bloc cliquable Jardin Lys. -->
+        </div><!-- Fin du groupe des projets. -->
+
+        <!-- .carre centre de nouveau un titre et une icône. -->
+        <div class="carre">
+            <!-- h2 indique le début du sujet « Pourquoi moi ? ». -->
+            <h2>Pourquoi moi ?</h2>
+
+            <!-- src charge l’icône. alt donne sa description.
+                 Sa largeur vient de la règle .carre img. -->
+            <img
+                class="scinti"
+                src="image/scinti.png"
+                alt="Ampoule"
+            >
+        </div><!-- Fin du bloc du titre. -->
+
+        <!-- .rectangle met en forme le bloc associé au titre. -->
+        <div class="rectangle">
+            <!-- p regroupe le texte sur tes qualités. -->
+            <p>
+                Je suis le genre de personne qui s'impliquera
+                au maximum pour réaliser les projets qu'on me propose.
+                Je pourrais notamment apporter du soutien créatif
+                et pédagogique avec mes futurs collègues.
+                De nature social, à l'écoute et empathique
+                je pense pouvoir être un atout pour travailler
+                dans les meilleurs conditions.
+            </p><!-- Fin du paragraphe. -->
+        </div><!-- Fin du bloc de texte. -->
+
+        <!-- .carre centre le seul titre de ce bloc. -->
+        <div class="carre">
+            <!-- h2 annonce la partie qui présente tes liens. -->
+            <h2>A propos de moi</h2>
+        </div><!-- Fin du dernier bloc de titre. -->
+
+        <!-- .rectangle place les deux titres l’un sous l’autre. -->
+        <div class="rectangle">
+            <!-- Ce h2 contient le texte du lien vers le CV. -->
+            <h2>
+                <!-- href donne l’adresse du CV sur Google Drive. -->
+                <a
+                    href="https://drive.google.com/file/d/11HBgsIUgllYcIuTnZ_ilK8F7Q9P8Dahx/view?usp=sharing"
+                >Lien vers mon CV
+                </a><!-- Fin du lien vers le CV. -->
+            </h2><!-- Fin du titre du lien. -->
+
+            <!-- Ce second h2 contient le lien GitHub. -->
+            <h2>
+                <!-- href donne cette fois l’adresse de ton profil. -->
+                <a href="https://github.com/edotensei7">
+                    Lien vers mon Github
+                </a><!-- Fin du lien GitHub. -->
+            </h2><!-- Fin du titre du lien. -->
+        </div><!-- Fin du bloc des deux liens. -->
+
+    </main><!-- Fin du contenu principal. -->
+</body><!-- Fin du contenu de la page. -->
+</html><!-- Fin du document. -->

@@ -1,0 +1,568 @@
+/*
+   COMMENT LE HTML ET LE CSS TRAVAILLENT ENSEMBLE
+
+   Dans index.html, cette balise charge le fichier CSS :
+   <link rel="stylesheet" href="style.css">
+
+   Le HTML dit ce que contient la page.
+   Le CSS dit comment placer et afficher ce contenu.
+
+   Le nom avant { indique quel élément modifier.
+   On appelle ce nom un sélecteur.
+
+   body cherche la balise <body>.
+   .carre cherche les éléments avec class="carre".
+   Le point indique qu’on cherche une classe.
+
+   Entre { et }, chaque ligne donne un réglage.
+   Dans color: white; la propriété est color.
+   Sa valeur est white. Le ; termine le réglage.
+*/
+
+
+/* Règle la balise <html>, qui contient <head> et <body>. */
+html {
+    /* Donne au document toute la largeur disponible. */
+    width: 100%;
+
+    /* Donne au document au moins la hauteur de sa zone
+       de référence. Une hauteur minimale permet à la page
+       de continuer plus bas quand il y a plus de contenu. */
+    min-height: 100%;
+}
+
+
+/* Règle <body>, qui contient la vidéo et le contenu du site. */
+body {
+    /* Le navigateur ajoute normalement une marge au body.
+       La valeur 0 retire cet espace autour de la page. */
+    margin: 0;
+
+    /* Donne au corps toute la largeur disponible dans html. */
+    width: 100%;
+
+    /* 100vh donne une hauteur minimale d’une fenêtre.
+       Cette ligne sert si le navigateur ne comprend pas dvh. */
+    min-height: 100vh;
+
+    /* dvh suit la hauteur qui change quand les barres
+       du navigateur mobile se déplient ou se replient.
+       Si le navigateur comprend dvh, il utilise cette ligne.
+       Le body peut toujours grandir avec les blocs. */
+    min-height: 100dvh;
+
+    /* Donne une couleur blanche au texte par défaut.
+       Les titres et les paragraphes peuvent reprendre
+       cette couleur du body. */
+    color: white;
+
+    /* x désigne le sens gauche-droite.
+       hidden cache ce qui dépasse sur les côtés.
+       Le visiteur peut continuer à défiler de haut en bas. */
+    overflow-x: hidden;
+
+    /* Donne au body son propre ordre de superposition.
+       La vidéo à z-index: -1 reste dans ce groupe.
+       Elle se dessine derrière les blocs du contenu. */
+    isolation: isolate;
+}
+
+
+/* Déclare une police que le navigateur peut charger. */
+@font-face {
+    /* MaPolice est le nom choisi pour appeler cette police
+       dans les règles CSS plus bas. */
+    font-family: "MaPolice";
+
+    /* url indique où chercher le fichier.
+       Le chemin part du dossier qui contient style.css.
+       truetype indique le format de ce fichier .ttf. */
+    src: url("police/FairfaxBold.ttf") format("truetype");
+}
+
+
+/* La virgule donne le même réglage à plusieurs balises.
+   h1 et h2 sont les titres. p représente les paragraphes. */
+h1,
+h2,
+p {
+    /* Le navigateur essaie d’afficher la police MaPolice.
+       S’il ne peut pas la charger, sans-serif demande
+       une police de secours sans petits traits aux lettres. */
+    font-family: "MaPolice", sans-serif;
+
+    /* Retire les marges que le navigateur met autour
+       des titres et des paragraphes.
+       Le CSS des blocs gère ensuite l’espace entre eux. */
+    margin: 0;
+}
+
+
+/* Cible les titres <h1> et <h2> de index.html. */
+h1,
+h2 {
+    /* Affiche les deux niveaux de titre à la même taille.
+       px signifie « pixel CSS », une unité de mise en page.
+       Le niveau du titre reste défini par la balise HTML. */
+    font-size: 22px;
+}
+
+
+/* Cible <video class="video-fond"> dans index.html.
+   La balise <source> indique quel MP4 lire.
+   Ce bloc CSS indique où et comment l’afficher. */
+.video-fond {
+    /* Fixe la vidéo par rapport à la fenêtre.
+       Les blocs défilent devant elle quand on descend. */
+    position: fixed;
+
+    /* Équivaut à top, right, bottom et left à 0.
+       Avec sa largeur et sa hauteur, la boîte vidéo
+       part du coin supérieur gauche de la fenêtre. */
+    inset: 0;
+
+    /* Donne à la vidéo un affichage de type bloc.
+       Ici, c’est position: fixed qui la sort de la mise
+       en page des autres éléments. */
+    display: block;
+
+    /* La boîte de la vidéo prend toute la largeur
+       de la zone où elle est fixée. */
+    width: 100%;
+
+    /* La boîte prend toute la hauteur de cette zone.
+       Sur petit écran, la règle @media change cette valeur. */
+    height: 100%;
+
+    /* Agrandit l’image du MP4 pour remplir cette boîte
+       tout en gardant ses proportions.
+       Sur un écran vertical, une vidéo horizontale
+       peut être coupée à gauche et à droite. */
+    object-fit: cover;
+
+    /* Garde le milieu de l’image au milieu de la boîte.
+       Si l’image déborde sur les côtés, le recadrage
+       retire la même quantité à gauche et à droite. */
+    object-position: center;
+
+    /* Place la vidéo derrière le contenu du body.
+       z-index règle l’ordre des éléments superposés. */
+    z-index: -1;
+
+    /* Les clics et les appuis passent à travers la vidéo.
+       Le navigateur laisse le visiteur utiliser les liens. */
+    pointer-events: none;
+}
+
+
+/* Cible <main class="grille">.
+   Ce main contient les blocs du portfolio.
+   La vidéo est à côté de main dans le HTML.
+   Elle ne prend donc aucune case de la grille. */
+.grille {
+    /* Active Grid pour les éléments placés directement
+       dans main. Le navigateur les place dans l’ordre
+       où ils apparaissent dans index.html. */
+    display: grid;
+
+    /* Crée deux colonnes sur les écrans assez larges.
+       La première fait 240 px pour le titre et son icône.
+       1fr donne l’espace restant à la colonne de texte.
+       Le texte a ainsi plus de largeur pour être lu. */
+    grid-template-columns: 240px 1fr;
+
+    /* Laisse 20 px entre les colonnes et entre les lignes.
+       La vidéo reste visible dans ces espaces. */
+    gap: 20px;
+
+    /* Limite la largeur du contenu de la grille à 1100 px.
+       Sur un grand écran, le texte garde une largeur
+       raisonnable. Le padding latéral s’ajoute à ce maximum. */
+    max-width: 1100px;
+
+    /* La première valeur donne 30 px en haut et en bas.
+       auto répartit l’espace libre à gauche et à droite.
+       Cela centre la grille lorsque la fenêtre est plus large. */
+    margin: 30px auto;
+
+    /* 0 signifie aucun espace intérieur en haut et en bas.
+       20px laisse de la place à gauche et à droite.
+       Les blocs restent séparés du bord de l’écran. */
+    padding: 0 20px;
+}
+
+
+/* Donne la même apparence à deux types de blocs HTML.
+   .carre vise surtout les <div> de titre.
+   .rectangle vise les blocs de texte.
+   Le <a> de Jardin Lys reçoit aussi ce style,
+   parce qu’il porte class="rectangle lien-jardinlys". */
+.carre,
+.rectangle {
+    /* Donne le fond bleu foncé derrière le texte.
+       hwb mélange une teinte, du blanc et du noir.
+       214 est la teinte bleue, 8% la part de blanc
+       et 71% la part de noir. */
+    background-color: hwb(214 8% 71%);
+
+    /* Trace un contour blanc continu de 2 px.
+       solid indique que le trait est continu. */
+    border: 2px solid white;
+
+    /* Arrondit les quatre coins du bloc. */
+    border-radius: 20px;
+
+    /* Garde 20 px entre le contour et ce que le bloc contient.
+       Le texte et les images évitent ainsi de coller au bord. */
+    padding: 20px;
+
+    /* Compte le contour et le padding dans la taille du bloc.
+       Si le bloc fait 240 px de haut, ces espaces sont
+       compris dans les 240 px. */
+    box-sizing: border-box;
+
+    /* Centre les lignes de texte de gauche à droite.
+       Le placement des images est réglé ailleurs. */
+    text-align: center;
+}
+
+
+/* Cible les blocs <div class="carre">.
+   Ils contiennent souvent un <h2> et une <img>. */
+.carre {
+    /* Donne 240 px de hauteur aux blocs de titre ordinaires.
+       Sur grand écran, leur colonne fait aussi 240 px.
+       Ces deux dimensions donnent leur forme carrée.
+       Le bloc des projets et le mobile ont d’autres réglages. */
+    height: 240px;
+
+    /* Active Flexbox à l’intérieur du bloc.
+       Grid place les blocs dans la page.
+       Flexbox place le titre et l’image dans le bloc. */
+    display: flex;
+
+    /* column empile le titre et l’image.
+       L’élément écrit en premier dans le HTML passe en haut.
+       Par exemple, le portrait précède son titre. */
+    flex-direction: column;
+
+    /* Avec column, centre chaque élément horizontalement.
+       Une petite icône apparaît donc au milieu de la largeur. */
+    align-items: center;
+
+    /* Avec column, centre le groupe de haut en bas.
+       Le titre et l’image restent ensemble au milieu du bloc. */
+    justify-content: center;
+
+    /* Laisse 10 px entre les enfants directs du bloc.
+       Par exemple, entre « Mes notions » et l’ampoule. */
+    gap: 10px;
+}
+
+
+/* Cible les blocs class="rectangle".
+   Il peut s’agir d’un <div> ou du lien <a> de Jardin Lys. */
+.rectangle {
+    /* Donne au bloc au moins 240 px de hauteur.
+       Un texte court a ainsi un bloc au moins aussi haut
+       qu’un bloc de titre ordinaire sur ordinateur.
+       Un texte long peut faire grandir le rectangle. */
+    min-height: 240px;
+
+    /* Active Flexbox dans le bloc de texte. */
+    display: flex;
+
+    /* Empile les paragraphes, les titres et les images
+       dans l’ordre écrit dans le HTML. */
+    flex-direction: column;
+
+    /* Centre le groupe de haut en bas s’il reste de la place.
+       Si le texte remplit le bloc, cet espace libre diminue. */
+    justify-content: center;
+
+    /* Laisse 12 px entre deux enfants directs.
+       Deux <p> sont séparés par cet écart.
+       Les lignes à l’intérieur d’un même <p>
+       sont espacées avec line-height. */
+    gap: 12px;
+}
+
+
+/* Cible <div class="ligne-projets">.
+   Dans le HTML, ce groupe contient deux blocs :
+   le <div class="carre"> du titre « Mes derniers projets »
+   et le <a class="rectangle lien-jardinlys"> de la boutique. */
+.ligne-projets {
+    /* 1 est le premier bord de la grille principale.
+       -1 est son dernier bord.
+       Le groupe des projets va du premier au dernier.
+       Il prend donc toute une ligne de la grille principale. */
+    grid-column: 1 / -1;
+
+    /* Crée une deuxième grille, à l’intérieur du groupe.
+       Elle place seulement le titre et le projet Jardin Lys. */
+    display: grid;
+
+    /* Garde 240 px pour le titre, comme les autres titres.
+       Le projet prend l’espace restant avec 1fr.
+       Le 0 de minmax autorise la colonne du projet
+       à rétrécir si l’espace se réduit. */
+    grid-template-columns: 240px minmax(0, 1fr);
+
+    /* Laisse 20 px entre le titre et le projet. */
+    gap: 20px;
+}
+
+
+/* Le signe > signifie « enfant direct ».
+   On vise uniquement le bloc .carre placé directement
+   dans .ligne-projets, donc « Mes derniers projets ».
+   Les blocs comme « Mes notions » gardent leur règle .carre. */
+.ligne-projets > .carre {
+    /* Retire la hauteur fixe de 240 px donnée par .carre.
+       La hauteur devient automatique.
+       Le bloc peut ainsi s’étirer dans sa ligne
+       si le bloc Jardin Lys demande plus de hauteur. */
+    height: auto;
+
+    /* Donne un minimum de 450 px à ce bloc de titre.
+       Sur ordinateur, Jardin Lys occupe une grande zone
+       avec une image et plusieurs paragraphes.
+       Ce minimum donne plus de présence à la section
+       et garde le titre centré dans un grand bloc à gauche.
+
+       450 px est un choix visuel.
+       Si le projet voisin est plus haut, la ligne peut grandir.
+       Sur mobile, les blocs sont l’un sous l’autre.
+       Le minimum revient alors à 200 px pour que le titre
+       ne prenne pas trop de place avant le projet. */
+    min-height: 450px;
+}
+
+
+/* L’espace signifie « à l’intérieur de ».
+   .carre img vise les balises <img> dans un bloc .carre.
+   Cela couvre l’ampoule, le dossier et aussi le portrait.
+   Le portrait reçoit ensuite ses propres dimensions. */
+.carre img {
+    /* Donne 60 px de largeur aux images des blocs. */
+    width: 60px;
+
+    /* Calcule la hauteur à partir des proportions
+       du fichier pour garder la forme de l’image. */
+    height: auto;
+}
+
+
+/* Vise class="photo" à l’intérieur d’un bloc .carre.
+   Dans le HTML, c’est le portrait du premier bloc.
+   Ce sélecteur est plus précis que .carre img.
+   Il peut donc donner une autre taille à cette image. */
+.carre .photo {
+    /* Donne une largeur de 140 px au portrait. */
+    width: 140px;
+
+    /* Donne la même hauteur pour former une boîte carrée. */
+    height: 140px;
+
+    /* Arrondit cette boîte carrée à 50 %.
+       Cela transforme sa forme en cercle. */
+    border-radius: 50%;
+
+    /* Remplit le cercle en gardant les proportions
+       de la photo. Une partie de l’image peut être coupée. */
+    object-fit: cover;
+
+    /* centre la photo de gauche à droite.
+       25% place le cadrage vertical plus haut que 50%.
+       Cela garde davantage le haut du portrait
+       si la photo doit être coupée en hauteur. */
+    object-position: center 25%;
+
+    /* Trace un anneau bleu continu de 5 px.
+       #0d2c83 est le code de cette couleur. */
+    border: 5px solid #0d2c83;
+
+    /* Le premier 0 enlève le décalage horizontal.
+       Le deuxième enlève le décalage vertical.
+       Le troisième enlève le flou.
+       4px white ajoute un anneau blanc à l’extérieur. */
+    box-shadow: 0 0 0 4px white;
+
+    /* Compte l’anneau bleu dans les 140 px.
+       L’anneau blanc de box-shadow se dessine autour. */
+    box-sizing: border-box;
+
+    /* Applique une légère teinte brune à la photo. */
+    filter: sepia(20%);
+}
+
+
+/* Cible <img class="jardinlysphoto"> dans le lien Jardin Lys.
+   Cette image est dans un .rectangle.
+   Sa taille vient de ce bloc CSS. */
+.jardinlysphoto {
+    /* Donne une largeur prévue de 350 px à la capture. */
+    width: 350px;
+
+    /* Limite l’image à la largeur disponible dans son bloc.
+       Si le bloc devient plus étroit, l’image rétrécit. */
+    max-width: 100%;
+
+    /* Ajuste la hauteur pour garder la forme de l’image. */
+    height: auto;
+
+    /* 0 en haut et en bas.
+       auto partage les marges à gauche et à droite.
+       Cela centre la capture dans le bloc Jardin Lys. */
+    margin: 0 auto;
+}
+
+
+/* Cible les balises <a> du HTML.
+   Cela comprend LinkedIn, Jardin Lys, le CV et GitHub. */
+a {
+    /* Donne une couleur blanche au texte des liens. */
+    color: white;
+}
+
+
+/* Cible le lien <a> qui porte class="lien-jardinlys".
+   Dans le HTML, ce lien entoure tout le bloc du projet. */
+.lien-jardinlys {
+    /* Retire le soulignement sur ce lien.
+       Le texte garde ainsi l’apparence d’un bloc de lecture. */
+    text-decoration: none;
+}
+
+
+/* :hover vise le moment où la souris passe sur le lien.
+   Comme le lien entoure le bloc, toute sa surface réagit. */
+.lien-jardinlys:hover {
+    /* Passe le fond au gris pour montrer que le bloc réagit.
+       rgb règle le rouge, le vert et le bleu.
+       Trois valeurs identiques donnent du gris. */
+    background-color: rgb(100, 100, 100);
+}
+
+
+/* @media applique ces règles si la fenêtre
+   fait 650 pixels CSS de large ou moins.
+   Dans index.html, le réglage viewport permet au téléphone
+   d’utiliser une largeur adaptée à son écran.
+
+   Les réglages mobiles sont écrits après les réglages
+   généraux. Quand le même sélecteur redéfinit une valeur
+   ici, le navigateur utilise la valeur de ce dernier bloc. */
+@media (max-width: 650px) {
+
+    /* Cible la même balise <video class="video-fond">. */
+    .video-fond {
+        /* vw mesure la largeur de la fenêtre.
+           100vw donne toute cette largeur à la vidéo. */
+        width: 100%;
+
+        /* Donne une hauteur de secours si dvh est inconnu. */
+        height: 100%;
+
+        /* Ajuste la hauteur de la boîte vidéo à la fenêtre
+           lorsque les barres du navigateur changent de place.
+           object-fit: cover continue de remplir cette boîte. */
+        height: 100dvh;
+    }
+
+    /* Cible le même <main class="grille">. */
+    .grille {
+        /* Passe de deux colonnes à une seule.
+           Le bloc de titre se place au-dessus de son texte
+           selon l’ordre dans index.html. */
+        grid-template-columns: 1fr;
+
+        /* Réduit l’écart entre les blocs pour utiliser
+           moins de place sur un écran étroit. */
+        gap: 15px;
+
+        /* Met 20 px au-dessus et en dessous de la grille.
+           auto continue de gérer les marges sur les côtés. */
+        margin: 20px auto;
+
+        /* Garde 15 px à l’intérieur des côtés.
+           Les blocs ont ainsi un peu plus de largeur
+           que si on gardait le padding de 20 px. */
+        padding: 0 15px;
+    }
+
+    /* Cible le groupe <div class="ligne-projets">. */
+    .ligne-projets {
+        /* Place le bloc Jardin Lys sous le titre des projets.
+           La grille à l’intérieur du groupe passe elle aussi
+           de deux colonnes à une seule. */
+        grid-template-columns: 1fr;
+
+        /* Laisse 15 px entre le titre et le bloc Jardin Lys. */
+        gap: 15px;
+    }
+
+    /* Cible les blocs <div class="carre"> sur mobile. */
+    .carre {
+        /* Donne au bloc toute la largeur de sa colonne. */
+        width: 100%;
+
+        /* Retire la hauteur fixe de 240 px.
+           La hauteur peut suivre le contenu du bloc. */
+        height: auto;
+
+        /* Garde au moins 200 px pour que le titre
+           et l’image aient un espace autour d’eux. */
+        min-height: 200px;
+    }
+
+    /* Cible précisément le bloc « Mes derniers projets ».
+       On reprend le même sélecteur qu’en haut du fichier
+       pour remplacer son minimum de 450 px.
+       La règle générale .carre ci-dessus est moins précise. */
+    .ligne-projets > .carre {
+        /* Sur mobile, le titre est au-dessus du projet.
+           Le ramener à 200 px évite de devoir traverser
+           un grand bloc vide avant d’arriver à la boutique. */
+        min-height: 200px;
+    }
+
+    /* Cible les blocs class="rectangle" sur mobile. */
+    .rectangle {
+        /* Retire le minimum de 240 px.
+           Le texte, les images et le padding donnent
+           au bloc la hauteur dont il a besoin. */
+        min-height: 0;
+    }
+
+    /* Cible les balises <h1> et <h2> sur mobile. */
+    h1,
+    h2 {
+        /* Passe de 22 à 20 px pour que les titres
+           prennent moins de largeur. */
+        font-size: 20px;
+    }
+
+    /* Cible les balises <p> sur mobile. */
+    p {
+        /* Affiche le texte des paragraphes en 16 px. */
+        font-size: 16px;
+
+        /* Donne à chaque ligne une hauteur de 1,5 fois
+           la taille du texte. Avec 16 px, cela fait 24 px.
+           Cet espace aide à suivre les lignes du paragraphe. */
+        line-height: 1.5;
+    }
+
+    /* Cible la même photo que dans le premier bloc .carre. */
+    .carre .photo {
+        /* Réduit la largeur du portrait pour le petit écran. */
+        width: 100px;
+
+        /* Réduit la hauteur à la même valeur.
+           La boîte reste carrée et border-radius: 50%
+           lui donne toujours une forme ronde. */
+        height: 100px;
+    }
+} /* Fin des réglages pour les fenêtres de 650 px ou moins. */
