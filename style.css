@@ -146,7 +146,7 @@ h2 {
 
     /* Place la vidéo derrière les blocs du site.
        z-index règle l'ordre des éléments superposés. */
-    z-index: -1;
+    z-index: 0;
 
     /* Les clics traversent la vidéo.
        On peut toujours utiliser les liens du site. */
@@ -188,6 +188,10 @@ h2 {
        20px d'espace intérieur à gauche et à droite.
        Les blocs ne collent pas au bord de l'écran. */
     padding: 0 20px;
+
+    position: relative;
+    
+   z-index: 1;
 }
 
 
